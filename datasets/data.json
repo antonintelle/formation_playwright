@@ -1,0 +1,9 @@
+{
+    "person": {
+        "firstname": "Anton",
+        "lastname": "Tete",
+        "email": "anton.tete@example.com",
+        "phone": "6868686868",
+        "address": "Dans la rue des Tetes, 75000 Paris, France"
+    }
+}
