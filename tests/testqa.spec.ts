@@ -12,7 +12,7 @@ test('remplir et valider le formulaire', async ({ page }) => {
     await page.locator('#userName').fill('Antonin Telle');
     await page.locator('#userEmail').fill('antonin.telle@email.com');
     await page.locator('#currentAddress').fill('Chez moi c\'est la rue yaya');
-    await page.locator('#permanentAddress').fill('la m');
+    await page.locator('#permanentAddress').fill('la meme');
     await page.locator('#submit').click();
     
     await expect(page.locator('#output')).toContainText('Antonin Telle');
@@ -30,7 +30,7 @@ test('checkbox', async ({ page }) => {
     await page.getByRole('listitem').filter({ hasText: /^Desktop$/ }).getByLabel('Toggle').click();
     await page.locator('label').filter({ hasText: 'Notes' }).getByRole('img').first().uncheck();
 
-    await expect(page.locator('#result')).toContainText('desktop');
+    await expect(page.locator('#result')).toContainText('commands');
     await expect(page.locator('#result')).not.toContainText('notes');
 });
 
@@ -49,7 +49,7 @@ test('file', async ({ page }) => {
 
     await page.locator('//span[text()="Upload and Download"]').click();
 
-    await page.locator('#uploadFile').setInputFiles('C:\\Users\\anton\\Downloads\\Get.pdf');
+    await page.locator('#uploadFile').setInputFiles('C:\\Users\\anton\\Downloads\\Galdric.png');
 
 });
 
@@ -60,7 +60,9 @@ test('formulaire',{ tag: ['@form']}, async ({ page }) => {
     await page.locator('#lastName').fill(faker.person.lastName());
     await page.locator('#userEmail').fill(faker.internet.email());
     await page.getByText('Male', { exact: true }).click();
-    await page.locator('#userNumber').fill(faker.phone.number());
+    // numéro au format 06XXXXXXXX ou 07XXXXXXXX
+    const phone = faker.helpers.fromRegExp('0[67][0-9]{8}');
+    await page.locator('#userNumber').fill(phone);
     await page.locator('#dateOfBirthInput').click();
     await page.locator('#subjectsInput').fill('Maths');
     await page.locator('#subjectsInput').press('Enter');
