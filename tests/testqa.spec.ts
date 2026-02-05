@@ -53,7 +53,7 @@ test('file', async ({ page }) => {
 
 });
 
-test('formulaire',{ tag: ['@form']}, async ({ page }) => {
+test('formulaire',{ tag: ['@form']} , async ({ page }) => {
     await page.goto('https://demoqa.com/automation-practice-form');
 
     await page.locator('#firstName').fill(faker.person.firstName());

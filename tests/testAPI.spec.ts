@@ -25,11 +25,27 @@ test.describe('API Users', () => {
             expect(post).toHaveProperty('body');
         }
 
-        // 4. Récupérer le post avec l'ID 1 et vérifier son titre
-
         const postOne = posts[0];
         expect(postOne.id).toBe(1);
-        // Exemple: adapter au titre attendu dans l’énoncé ou la doc du cours
         expect(postOne.title).toBeDefined();
+    });
+
+    test('POST - Création et manipulation de ressouces', async ({request}) => {
+        const newPost = {
+            title: 'Mon premier test',
+            body: 'Contenu du test',
+            userId: 1
+        };
+
+        const createResponse = await request.post('https://jsonplaceholder.typicode.com/posts', {
+            data: newPost
+        })
+
+        expect(createResponse.status()).toBe(201);
+
+        const createdPost = await createResponse.json();
+        const createdPostId = createdPost.id;
+        expect(createdPostId).toBeDefined;
+        expect(createdPost.title).toBe(newPost.title);
     });
 });

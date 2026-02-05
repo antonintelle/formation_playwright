@@ -18,5 +18,7 @@ test('formulaire', async ({ page }) => {
     await page.locator('#currentAddress').fill(process.env.ADDRESS || faker.location.streetAddress());
     await page.locator('#submit').click();
 
+    console.log(process.env.FRIST_NAME);
+
     await expect(page.locator('.modal-content')).toBeVisible();
 });
